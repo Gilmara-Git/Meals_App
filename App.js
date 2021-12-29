@@ -1,8 +1,13 @@
-import { StatusBar} from 'expo-status-bar';
-import {  useState } from 'react';
-import {Text, View } from 'react-native';
+
+
+import React, {  useState } from 'react';
+
+
 import  AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font';
+
+import MealsNavigator from './navigation/MealsNavigation';
+// This is a REact Component we are rendering on the return
 
 
   const fontsFetch = ()=>{
@@ -23,12 +28,7 @@ export default function App() {
       />   
   }
 
-  return (
-    <View >
-      <Text>Open up App.js to start working on your app!!!!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  return <MealsNavigator />
 }
 
 

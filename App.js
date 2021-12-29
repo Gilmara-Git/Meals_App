@@ -22,7 +22,7 @@ export default function App() {
       onError={(error)=>{console.log(error)}}  
       />   
   }
-console.log(isFontsLoaded, 'fonts loaded')
+
   return (
     <View >
       <Text>Open up App.js to start working on your app!!!!</Text>

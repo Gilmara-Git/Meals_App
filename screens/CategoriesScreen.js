@@ -10,7 +10,9 @@ import {
 } from 'react-native';
 
 import CATEGORIES from '../data/dummy-data';
-// console.log(CATEGORIES, 'CATE')
+import Colors from '../constants/Colors';
+
+console.log(Colors)
 
 
 const CategoriesScreen = props =>{
@@ -45,12 +47,19 @@ const CategoriesScreen = props =>{
                 numColumns={2}
                 data={CATEGORIES}
                 keyExtractor={(item, index)=>item.id}
-                renderItem={renderGridItem}
-               
+                renderItem={renderGridItem} 
             />
-      
     );
 };
+
+CategoriesScreen.navigationOptions = { 
+    headerTitle: "Meal Categories",   
+    headerStyle: {
+        backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
+    },
+    headerTintColor: Platform.OS === 'android' ? Colors.white : Colors.primaryColor,
+
+}
 
 
 const styles =  StyleSheet.create({

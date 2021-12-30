@@ -12,19 +12,17 @@ import {
 import CATEGORIES from '../data/dummy-data';
 import Colors from '../constants/Colors';
 
-console.log(Colors)
-
 
 const CategoriesScreen = props =>{
 
     let TouchGrid = TouchableOpacity;
-    if(Platform.OS === 'android' && Platform.Version >=21){
+    if(Platform.OS === 'android' && Platform.Version >=21){       
         TouchGrid = TouchableNativeFeedback;
     }
     
     const renderGridItem = itemData =>{
         return (
-            <TouchableOpacity activeOpacity={0.6}
+            <TouchGrid activeOpacity={0.6}
                     // style={{...styles.gridItem, backgroundColor: itemData.item.color}}
                     onPress={()=>{
                         props.navigation.navigate({routeName:'CategoryMeals'})
@@ -33,11 +31,10 @@ const CategoriesScreen = props =>{
                     >
                    
                        
-                    <View >
+                    <View style={{...styles.gridItem, backgroundColor: itemData.item.color}}>
                         <Text style={styles.gridText} numberOfLines={2}>{itemData.item.title}</Text>
                     </View>
-             
-                </TouchableOpacity>
+                </TouchGrid>
                     );
     };
 

@@ -6,7 +6,7 @@ import React, {  useState } from 'react';
 import  AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font';
 
-import MealsNavigator from './navigation/MealsNavigation';
+import MealsNavigator from './navigation/MealsNavigator';
 // This is a REact Component we are rendering on the return
 
 

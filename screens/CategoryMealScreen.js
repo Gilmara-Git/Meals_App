@@ -9,10 +9,7 @@ import {
 
 import CATEGORIES from '../data/dummy-data';
 
-// console.log(CATEGORIES)
-
 const CategoryMealScreen = props =>{
-
    const catId = props.navigation.getParam('categoryId');
    const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
  
@@ -32,7 +29,7 @@ CategoryMealScreen.navigationOptions = (navigationData)=>{
 
     const catId = navigationData.navigation.getParam('categoryId');
     const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
-    console.log(selectedCategory, 'selectedCategory')
+    // console.log(selectedCategory, 'selectedCategory')
      
     return  {
                 headerTitle: selectedCategory.title, 

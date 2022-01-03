@@ -10,6 +10,7 @@ import {
 } from 'react-native'; 
 
 import  CATEGORIES  from '../data/dummy-data';
+import CategoryGridTile from '../components/CategoryGridTile';
 
 const CategoriesScreen = props =>{
 
@@ -19,23 +20,15 @@ const CategoriesScreen = props =>{
     }
     
     const renderGridItem = itemData =>{
-        return (
-            <TouchGrid activeOpacity={0.6}
-                    // style={{...styles.gridItem, backgroundColor: itemData.item.color}}
-                    onPress={()=>{
-                        props.navigation.navigate({routeName:'CategoryMeals', params: {
-                            categoryId: itemData.item.id,                            
-                        }})
-                    }} 
-                    style={{...styles.gridItem, backgroundColor: itemData.item.color}}
-                    >
-                   
-                       
-                    <View style={{...styles.gridItem, backgroundColor: itemData.item.color}}>
-                        <Text style={styles.gridText} numberOfLines={2}>{itemData.item.title}</Text>
-                    </View>
-                </TouchGrid>
-                    );
+        return <CategoryGridTile 
+                    title={itemData.item.title}
+                    onSelect={()=>{
+                        props.navigation.navigate({routeName:'CategoryMeals',
+                        params: { categoryId: itemData.item.id}
+                    })
+                    }}
+                    color={itemData.item.color}
+                    />
     };
 
     return (
@@ -56,23 +49,23 @@ CategoriesScreen.navigationOptions = {
 
 const styles =  StyleSheet.create({
     screen:{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        // flex: 1,
+        // justifyContent: 'center',
+        // alignItems: 'center',
       
     },
-    gridItem:{
-        flex: 1,
-        height: 150,
-        width: 150,
-        margin: 15,
-        alignItems: 'flex-end',
-        justifyContent: 'flex-end',
-        borderRadius: 8
-    },
-    gridText:{
-        fontSize: 20,
-        padding: 10
-    }
+    // gridItem:{
+    //     flex: 1,
+    //     height: 150,
+    //     width: 150,
+    //     margin: 15,
+    //     alignItems: 'flex-end',
+    //     justifyContent: 'flex-end',
+    //     borderRadius: 8
+    // },
+    // gridText:{
+    //     fontSize: 20,
+    //     padding: 10
+    // }
 });
 export default CategoriesScreen;

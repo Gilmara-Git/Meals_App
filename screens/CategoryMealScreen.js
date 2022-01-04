@@ -1,24 +1,42 @@
 import React from 'react';
 import { 
-    View, 
-    Text, 
+    View,   
     StyleSheet,
-    Button
+    FlatList,
+
 } from 'react-native';
 
 
-import CATEGORIES from '../data/dummy-data';
+import  { CATEGORIES, MEALS } from '../data/dummy-data';
+import MealItem from '../components/MealItem';
 
 const CategoryMealScreen = props =>{
    const catId = props.navigation.getParam('categoryId');
-   const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
+   const displayedMeals = MEALS.filter(
+       meal => meal.categoryIds.includes(catId)
+       );
+  // he did meal.categoryId.indexOf(catId) >=0
+
+    const renderItemMeal = (itemData)=>{
+        return <MealItem 
+                    title={itemData.item.title} 
+                    duration={itemData.item.duration} 
+                    complexity={itemData.item.complexity}
+                    affordability={itemData.item.affordability}
+                    image={itemData.item.imageURL}
+                    onSelectMeal={()=>{console.log('to ripple effect')}}
+                />
+    };
  
     return (
         <View style={styles.screen}>
-            <Text>The Category Meal Screen !!</Text>
-            <Button title="Go to MealDetails" onPress={()=>{
-                props.navigation.navigate({routeName: 'MealDetail'});
-            }} />
+            <FlatList 
+                 keyExtractor={(item, index)=>{item.id}}
+                 data={displayedMeals}
+                 renderItem={renderItemMeal}
+                 showVerticalScrollIndicator={false}
+                 style={{width: "96%", marginVertical: 8}}
+            />
         </View>
     );
 };
@@ -31,20 +49,17 @@ CategoryMealScreen.navigationOptions = (navigationData)=>{
     const selectedCategory = CATEGORIES.find(cat => cat.id === catId);
     // console.log(selectedCategory, 'selectedCategory')
      
-    return  {
-                headerTitle: selectedCategory.title, 
-                
-        }
-}
+    return  {  headerTitle: selectedCategory.title }
+};
    
-
-
-
 const styles =  StyleSheet.create({
     screen:{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
-    },
+    }, 
 });
+
+
+
 export default CategoryMealScreen;

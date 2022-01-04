@@ -44,23 +44,23 @@ const styles = StyleSheet.create({
         height: 150,
         margin: 15,
         borderRadius: 10,
-        overflow: 'hidden'
+        overflow: 'hidden',
 
     },
     container:{
         flex:1,        
         borderRadius: 10,
         shadowColor: Colors.black,
-        shadowOpacity: 0.4,
+        shadowOpacity: 0.26,
         shadowOffset: {width: 0, height: 2},
         shadowRadius: 10,
         elevation: 3,
         alignItems: 'flex-end',
         justifyContent: 'flex-end',
-        padding: 10
+        padding: 15
     },
     gridText:{
-        fontSize: 22,
+        fontSize: 20,
         fontFamily: 'openSansBold', 
         textAlign: 'right' 
     }

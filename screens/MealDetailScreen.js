@@ -2,12 +2,15 @@ import React from "react";
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 
 import { MEALS } from '../data/dummy-data';
+import CustomHeaderButton from '../components/CustomHeaderButton';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+
+
 
 const MealDetailScreen = (props) => {
-
   const mealId = props.navigation.getParam('mealId');
   const selectedMeal = MEALS.find(meal => meal.id === mealId);
-  // console.log('selectedMeal', selectedMeal, 'selectedMeal')
+
 
   return (
     <View style={styles.screen}>    
@@ -41,9 +44,14 @@ MealDetailScreen.navigationOptions = (navigationData) => {
   const selectedMeal = MEALS.find(meal => meal.id === mealId);
 
   return {  
-    headerTitle: selectedMeal.title
+    headerTitle: selectedMeal.title,
+    headerRight: <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                    <Item title="Favorite"
+                          iconName="ios-star"
+                          onPress={()=>{console.log("Favorite Star")}}
+                    />
+                </HeaderButtons>
   };
-
 };
 
 const styles = StyleSheet.create({

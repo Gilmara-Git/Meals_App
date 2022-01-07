@@ -18,6 +18,15 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 // createStackNavigator returns a NavigationContainer , so we will store it in a variable
 // Then we need to create an AppContainer to put our Navigation container inside the AppContainer
 
+const modalAndroidDefaultIos = Platform.OS === 'android'? 'modal': 'default';
+
+const defaultStackNavOptions = {
+    headerStyle: {
+        backgroundColor: Platform.OS === 'android'? Colors.primaryColor : '',
+    },
+    headerTintColor: Platform.OS === 'android' ? Colors.white : Colors.primaryColor
+}
+
 const MealsNavigator = createStackNavigator({   
     Categories: CategoriesScreen,   
     CategoryMeals: CategoryMealScreen,       
@@ -25,16 +34,21 @@ const MealsNavigator = createStackNavigator({
 }, 
 {   
     // initialRouteName: 'Categories',
-    mode: 'modal',
-    defaultNavigationOptions: { 
-    headerStyle: {
-        backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
+    mode: modalAndroidDefaultIos,
+    defaultNavigationOptions: defaultStackNavOptions
+});
+
+const FavoritesNavigator = createStackNavigator({
+    Favorites: {
+        screen: FavoritesScreen,    
     },
-    headerTintColor: Platform.OS === 'android' ? Colors.white : Colors.primaryColor,
-    // headerTitle: "screen"
-}}
-    
-);
+    MealDetail: {
+        screen: MealDetailScreen
+    }
+}, {
+    mode: modalAndroidDefaultIos,
+    defaultNavigationOptions: defaultStackNavOptions
+});
 
 const tabScreenConfig = {
     Meals: { 
@@ -48,7 +62,7 @@ const tabScreenConfig = {
         }
     },
     Favorites: {
-        screen: FavoritesScreen,
+        screen: FavoritesNavigator,
         navigationOptions:{
             tabBarLabel: 'Favorites',
             tabBarIcon: (tabInfo)=>{

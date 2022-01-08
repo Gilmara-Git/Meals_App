@@ -2,7 +2,7 @@
 // on top of the stack is the page on top
 // when we go back it pops the top page and shows the previous page
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Text } from 'react-native';
 import Colors from '../constants/Colors';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer  } from 'react-navigation'; //always import from here no matter what version
@@ -66,7 +66,9 @@ const tabScreenConfig = {
             tabBarIcon: (tabInfo)=>{
                 return <Ionicons name='restaurant' size={20} color={tabInfo.tintColor}/>
             },
-            tabBarColor: Colors.primaryColor
+            tabBarColor: Colors.primaryColor,
+            tabBarLabel: Platform.OS === 'android' 
+            ? <Text style={{fontFamily: 'openSansBold'}}>Meals</Text> :'Meals'
         }
     },
     Favorites: {
@@ -76,7 +78,9 @@ const tabScreenConfig = {
             tabBarIcon: (tabInfo)=>{
                 return <Ionicons name='star' size={20} color={tabInfo.tintColor}/>
             },
-            tabBarColor: Colors.secondaryColor  // shifitin has to be true
+            tabBarColor: Colors.secondaryColor,  // shifitin has to be true
+            tabBarLabel: Platform.OS === 'android' 
+            ? <Text style={{fontFamily: 'openSansBold'}}>Favorites</Text> :'Favorites'
         }
     }
 }
@@ -96,6 +100,10 @@ const MealFavTabNavigator =
     : createBottomTabNavigator(tabScreenConfig,{
         tabBarOptions: {
             activeTintColor: Colors.secondaryColor,
+            labelStyle:{
+                fontFamily: 'openSansBold'
+            }
+        
             // activeBackgroundColor: Colors.primaryColor
         },
        

@@ -1,17 +1,19 @@
 // we will create a stack of pages
 // on top of the stack is the page on top
 // when we go back it pops the top page and shows the previous page
+import React from 'react';
 import { Platform } from 'react-native';
 import Colors from '../constants/Colors';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer  } from 'react-navigation'; //always import from here no matter what version
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import React from 'react';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoryMealScreen from '../screens/CategoryMealScreen';
 import MealDetailScreen from '../screens/MealDetailScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
+import FiltersScreen from '../screens/FiltersScreen';
 import { Ionicons }  from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs" // for android
 
@@ -93,7 +95,15 @@ const MealFavTabNavigator =
        
     })
 
+   const FiltersNavigator =  createStackNavigator({
+       Filters: FiltersScreen
+    });
 
-export default createAppContainer(MealFavTabNavigator); // root navigator  -  entry point to the App
+    const MainNavigator = createDrawerNavigator({   // The tabs will be inside the drawer navigator
+        MealsFavs: MealFavTabNavigator,
+        Filters: FiltersNavigator
+    });
+
+export default createAppContainer(MainNavigator); // root navigator  -  entry point to the App
 // createStackNavigator/createAppContainer RETURN a React Component, meaning you
 // can render it on the App.js 

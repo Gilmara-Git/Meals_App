@@ -1,11 +1,27 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { 
+    View, 
+    Text, 
+    StyleSheet, 
+    FlatList
+
+} from 'react-native';
+import { MEALS } from '../data/dummy-data'
+// console.log('===================MEALS============')
+// console.log(MEALS)
 
 const FavoritesScreen = props =>{
+
+    const favMeals = MEALS.filter(meal=> meal.id === 'm1' || meal.id === 'm2');
+    console.log('fav', favMeals )
+
+
     return (
-        <View style={styles.screen}>
-            <Text>The Favorites Screen !</Text>
-        </View>
+        <FlatList
+            data={favMeals}
+            keyExtractor={(item, index)=>item.id}    
+            renderItem={(itemData)=><View><Text>{itemData.item.title}</Text></View>}
+        />
     );
 };
 

@@ -26,6 +26,12 @@ const defaultStackNavOptions = {
     headerStyle: {
         backgroundColor: Platform.OS === 'android'? Colors.primaryColor : '',
     },
+    headerTitleStyle:{
+        fontFamily: 'openSansBold', 
+    },
+    headerBackTitleStyle:{
+        fontFamily: 'openSansRegular'
+    },
     headerTintColor: Platform.OS === 'android' ? Colors.white : Colors.primaryColor
 }
 
@@ -97,11 +103,28 @@ const MealFavTabNavigator =
 
    const FiltersNavigator =  createStackNavigator({
        Filters: FiltersScreen
-    });
+    },{
+    mode: modalAndroidDefaultIos,
+    defaultNavigationOptions: defaultStackNavOptions
+});
 
     const MainNavigator = createDrawerNavigator({   // The tabs will be inside the drawer navigator
-        MealsFavs: MealFavTabNavigator,
+        MealsFavs: { 
+            screen: MealFavTabNavigator,
+            navigationOptions: {
+                drawerLabel: "Meals"
+            },
+           
+        },
         Filters: FiltersNavigator
+    }, {
+        contentOptions:{
+            activeTintColor: Platform.OS === 'android' ? Colors.white: Colors.secondaryColor, 
+            activeBackgroundColor: Platform.OS === 'android' ? Colors.primaryColor: Colors.white,
+            labelStyle: {
+                fontFamily: 'openSansBold',       
+            }          
+        }
     });
 
 export default createAppContainer(MainNavigator); // root navigator  -  entry point to the App

@@ -9,6 +9,7 @@ import {
     TouchableNativeFeedback
 } from 'react-native';
 import Colors  from '../constants/Colors';
+import DefaultText from './DefaultText';
 
 
 const MealItem = (props)=>{
@@ -37,9 +38,9 @@ const MealItem = (props)=>{
                         </ImageBackground>
                     </View>
                     <View style={{...styles.mealRow, ...styles.mealDetail}}>
-                        <Text>{props.duration} minutes</Text>
-                        <Text>{props.complexity.toUpperCase()}</Text>
-                        <Text>{props.affordability.toUpperCase()}</Text>
+                        <DefaultText>{props.duration} minutes</DefaultText>
+                        <DefaultText>{props.complexity.toUpperCase()}</DefaultText>
+                        <DefaultText>{props.affordability.toUpperCase()}</DefaultText>
                     </View>
                       
                 </View>

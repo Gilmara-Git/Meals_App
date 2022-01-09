@@ -32,8 +32,7 @@ const CategoriesScreen = props =>{
     );
 };
 
-CategoriesScreen.navigationOptions = (navigationData)=>{ 
-    console.log(navigationData, 'navData')
+CategoriesScreen.navigationOptions = (navigationData)=>{  
    return { 
                 headerTitle: "Meal Categories", 
                 headerLeft: ( 

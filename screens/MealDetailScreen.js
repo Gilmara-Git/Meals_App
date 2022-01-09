@@ -1,40 +1,41 @@
 import React from "react";
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Image } from 'react-native';
 
 import { MEALS } from '../data/dummy-data';
 import CustomHeaderButton from '../components/CustomHeaderButton';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-
+import DefaultText from '../components/DefaultText';
+import Colors from '../constants/Colors';
+import ListItem from '../components/ListItem';
 
 
 const MealDetailScreen = (props) => {
   const mealId = props.navigation.getParam('mealId');
   const selectedMeal = MEALS.find(meal => meal.id === mealId);
-
-
+ 
   return (
-    <View style={styles.screen}>    
-    
-        <View><Text>Ingredients</Text></View>
+    <ScrollView>
+      <Image 
+        source={{uri: selectedMeal.imageURL}}
+        style={styles.image}
+        resizeMode="cover"
+        />
+  
+      <View style={styles.details}>
+        <DefaultText>{selectedMeal.duration} minutes</DefaultText>
+        <DefaultText>{selectedMeal.complexity.toUpperCase()}</DefaultText>
+        <DefaultText>{selectedMeal.affordability.toUpperCase()}</DefaultText>
+      </View>
+
+      
+      <DefaultText style={{...styles.title, marginTop:20 }}>Ingredients</DefaultText>     
+        { selectedMeal.ingredients.map(ingredient=>
+              <ListItem key={ingredient}>{ingredient}</ListItem>)}
      
-          <FlatList
-              data={selectedMeal.ingredients}
-              keyExtractor={(item, index)=>{ item.id === index}}
-              renderItem={(itemData)=>{
-                return <Text>{itemData.item}</Text>
-              }}  
-              />
-   
-        <View><Text>Steps</Text></View>
-          <FlatList 
-            data={selectedMeal.steps}
-            keyExtractor={(item, index)=> {item.id === index}}
-            renderItem={(itemData)=>{
-              return <Text>{itemData.item}</Text>
-            }}
-          />
+      <DefaultText style={styles.title}>Steps</DefaultText>   
+         {selectedMeal.steps.map(step=><ListItem key={step}>{step}</ListItem>)}
     
-    </View> 
+    </ScrollView>
   );
 };
 
@@ -57,10 +58,23 @@ MealDetailScreen.navigationOptions = (navigationData) => {
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+  image: {
+    width:"100%",
+    height: 200
   },
+  details:{
+    flexDirection: 'row',
+    padding: 8,
+    justifyContent: 'space-around',
+    borderBottomWidth: 1,
+    borderColor: Colors.darkTransparent
+  },
+  title:{
+    textAlign: 'center',
+    fontFamily: 'openSansBold',
+    fontSize: 22
+  },
+
+ 
 });
 export default MealDetailScreen;

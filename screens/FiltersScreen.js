@@ -1,18 +1,35 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Switch ,Platform} from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+import { View, Text, StyleSheet} from "react-native";
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButtons from  '../components/CustomHeaderButton';
-import Colors from '../constants/Colors';
 import FilterSwitch from '../components/FilterSwitch';
 
 const FiltersScreen = (props) => {
+
   const [isGlutenFree, setIsGlutenFree] = useState(false);
   const [isLactoseFree, setIsLactoseFree] = useState(false);
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
-  console.log(isGlutenFree, 'free')
 
   // const toggleSwitch = ()=>{setIsGlutenFree(previousState => !previousState)}
+  const { navigation } = props;
+
+  const saveFilters = useCallback(() => {
+    const appliedFilters = {
+      glutenFree: isGlutenFree,
+      lactoseFree: isLactoseFree,
+      vegan: isVegan,
+      vegetarian: isVegetarian
+    }
+    console.log(appliedFilters, 'I am in the saveFilters inside the useCall')
+    return appliedFilters;
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+
+  useEffect(()=>{
+    navigation.setParams({save: saveFilters })
+  }, [saveFilters])
+
+  console.log(saveFilters, 'sou o saveFilters')
 
   return (
     <View style={styles.screen}>
@@ -57,7 +74,17 @@ FiltersScreen.navigationOptions = (navData)=> {
                             }}
                             />
                         </HeaderButtons>
-                      )
+                      ),
+          headerRight: (
+                        <HeaderButtons HeaderButtonComponent={CustomHeaderButtons}>
+                          <Item
+                            title="Save"
+                            iconName='ios-save'
+                            onPress={navData.navigation.getParam('save')
+                          }
+                          />
+                        </HeaderButtons>
+                        )
           };
 }
 

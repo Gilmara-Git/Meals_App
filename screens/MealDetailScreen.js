@@ -1,4 +1,4 @@
-import React , { useEffect } from "react";
+import React , { useEffect, useCallback } from "react";
 import { StyleSheet, View, ScrollView, Image } from 'react-native';
 
 import CustomHeaderButton from '../components/CustomHeaderButton';
@@ -6,7 +6,8 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import DefaultText from '../components/DefaultText';
 import Colors from '../constants/Colors';
 import ListItem from '../components/ListItem';
-import { useSelector } from 'react-redux';
+import { useSelector , useDispatch } from 'react-redux';
+import { toggleFavorite } from '../store/actions/meals';
 
 
 const MealDetailScreen = (props) => {
@@ -14,10 +15,15 @@ const MealDetailScreen = (props) => {
   const availableMeals = useSelector(state => state.meals.meals)
 
   const selectedMeal = availableMeals.find(meal => meal.id === mealId);
+  const dispatch = useDispatch();
 
-  // useEffect(()=>{
-  //   props.navigation.setParams({ mealTitle: selectedMeal.title})
-  // }, [selectedMeal]);
+  const toggleFavoriteHandler = useCallback(()=>{
+    dispatch(toggleFavorite(mealId));
+  },[dispatch, mealId]);
+
+  useEffect(()=>{
+    props.navigation.setParams({toggleFav: toggleFavoriteHandler })
+  }, [toggleFavoriteHandler]);
  
   return (
     <ScrollView>
@@ -46,9 +52,7 @@ const MealDetailScreen = (props) => {
 };
 
 MealDetailScreen.navigationOptions = (navigationData) => {
-  // console.log(navigationData, 'navData')
-  // const mealId = navigationData.navigation.getParam('mealId');
-  // const selectedMeal = MEALS.find(meal => meal.id === mealId);
+  const toggleFavorite = navigationData.navigation.getParam('toggleFav')
   const mealTitle =  navigationData.navigation.getParam('mealTitle')
 
   return {  
@@ -57,7 +61,7 @@ MealDetailScreen.navigationOptions = (navigationData) => {
                 <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                     <Item title="Favorite"
                           iconName="ios-star"
-                          onPress={()=>{console.log("Favorite Star")}}
+                          onPress={toggleFavorite}
                     />
                 </HeaderButtons>
                 )

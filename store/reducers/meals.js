@@ -1,13 +1,33 @@
-import  { MEALS } from '../../data/dummy-data';
+import { MEALS } from '../../data/dummy-data';
+import { TOGGLE_FAVORITE } from '../actions/meals';
 
-const initialState = {
+
+export const initialState ={
     meals: MEALS,
     filteredMeals: MEALS,
-    favoriteMeals : [] // in a real app we would store this is a server, so when the user closes and open the app the favorites is shown
-};
-
-const mealsReducer = (state = initialState, action)=>{
-    return state;
+    favoriteMeals : []
 }
+
+const mealsReducer = (state = initialState, action )=>{
+    switch(action.type) {
+        case TOGGLE_FAVORITE:
+            const existingIndex = state.favoriteMeals.findIndex(meal=> meal.id === action.mealId);
+            // console.log(existingIndex, 'isFav')
+            if(existingIndex >=0){
+                const updatedFavMeals =  [ ...state.favoriteMeals];
+                updatedFavMeals.splice(existingIndex, 1);  
+                // console.log(updatedFavMeals, 'UPfav')             
+                return { ...state, favoriteMeals:updatedFavMeals }
+
+            }else{
+                // console.log(state.favoriteMeals,'fav')
+                const meal = state.meals.find(meal=> meal.id === action.mealId);
+                return { ...state, favoriteMeals: state.favoriteMeals.concat(meal)}
+            }
+    }
+
+    
+    return state;
+};
 
 export default mealsReducer;

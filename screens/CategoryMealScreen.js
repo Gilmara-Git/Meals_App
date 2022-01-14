@@ -1,10 +1,8 @@
 import React from 'react';
-import { View, StyleSheet} from 'react-native';
-import DefaultText from '../components/DefaultText';
 import  { CATEGORIES } from '../data/dummy-data';
 import MealList from '../components/MealList';
+import FallBack from '../components/FallBack';
 import { useSelector } from 'react-redux';
-import Colors from '../constants/Colors';
 
 const CategoryMealScreen = props =>{
     const catId = props.navigation.getParam('categoryId');
@@ -16,15 +14,9 @@ const CategoryMealScreen = props =>{
   // he did meal.categoryId.indexOf(catId) >=0
 
   if(displayedMeals.length === 0){
-      return (
-          <View style={styles.content}>
-              <DefaultText 
-                numberOfLines={2}
-                style={styles.text}>
-                    Check your filters!
-              </DefaultText>
-          </View>
-      )
+      return <FallBack
+                displayText='Check your filters!'
+            />
   }
 
     return <MealList 
@@ -44,21 +36,5 @@ CategoryMealScreen.navigationOptions = (navigationData)=>{
      
     return  {  headerTitle: selectedCategory.title }
 };
-   
-const styles = StyleSheet.create({
-    content:{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: Colors.darkTransparent
-    },
-    text:{
-        color: Colors.primaryColor,
-        fontSize: 35,
-        marginHorizontal: 10,
-        textAlign: 'center'
-       
-    }
-});
 
 export default CategoryMealScreen;

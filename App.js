@@ -1,5 +1,6 @@
 
 import React, {  useState } from 'react';
+import { StatusBar , Platform} from 'react-native';
 import { createStore, combineReducers } from 'redux';
 import mealsReducer from './store/reducers/meals';
 import { Provider } from 'react-redux';
@@ -37,6 +38,10 @@ export default function App() {
   }
   return (
     <Provider store={store}>
+      <StatusBar 
+        barStyle={Platform.OS === 'android'? 'light-content': 'dark-content'}
+        
+      />
       <MealsNavigator />
     </Provider>
   )

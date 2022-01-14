@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const MealList = (props) => {
 
   const favoriteMeals = useSelector(state=>state.meals.favoriteMeals);
-
+  
   const renderItemMeal = (itemData) => {
     const isFavorite = favoriteMeals.some(meal=> meal.id === itemData.item.id);
     return (
@@ -30,7 +30,8 @@ const MealList = (props) => {
     );
   };
 
-  return (
+ 
+  return (   
     <View style={styles.screen}>
       <FlatList
         keyExtractor={(item, index) => {

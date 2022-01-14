@@ -3,6 +3,9 @@ import { View, Text, StyleSheet} from "react-native";
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButtons from  '../components/CustomHeaderButton';
 import FilterSwitch from '../components/FilterSwitch';
+import { useDispatch } from 'react-redux';
+import { setFilters } from '../store/actions/meals';
+
 
 const FiltersScreen = (props) => {
 
@@ -10,9 +13,10 @@ const FiltersScreen = (props) => {
   const [isLactoseFree, setIsLactoseFree] = useState(false);
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
-
-  // const toggleSwitch = ()=>{setIsGlutenFree(previousState => !previousState)}
   const { navigation } = props;
+  // const toggleSwitch = ()=>{setIsGlutenFree(previousState => !previousState)}
+
+  const dispatch = useDispatch();
 
   const saveFilters = useCallback(() => {
     const appliedFilters = {
@@ -21,9 +25,15 @@ const FiltersScreen = (props) => {
       vegan: isVegan,
       vegetarian: isVegetarian
     }
-    console.log(appliedFilters, 'I am in the saveFilters inside the useCall')
-    return appliedFilters;
-  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+    dispatch(setFilters(appliedFilters))
+
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian, dispatch]);
+
+
+  const setFiltersHandler = useCallback(()=>{
+    dispatch(setFilters(saveFilters))
+  }, [dispatch, saveFilters])
+
 
   useEffect(()=>{
     navigation.setParams({save: saveFilters })

@@ -16,7 +16,8 @@ const FavoritesScreen = props =>{
             <View style={styles.content}>
                <DefaultText
                     numberOfLines={2}
-                    style={styles.text}>No favorites Meals. Add them!
+                    style={styles.text}>
+                        No favorites Meals. Add them!
                 </DefaultText>
             </View>)
     }

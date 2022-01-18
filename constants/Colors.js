@@ -7,6 +7,7 @@ export default {
         gray: '#cecece',
         darkTransparent: 'rgba(0,0,0,0.3)',
         lightPink: '#fff5f0',
-        lightGreen:'#c0ffd5'
+        lightGreen:'#c0ffd5',
+        
 }
 

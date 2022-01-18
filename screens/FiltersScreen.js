@@ -39,8 +39,6 @@ const FiltersScreen = (props) => {
     navigation.setParams({save: saveFilters })
   }, [saveFilters])
 
-  console.log(saveFilters, 'sou o saveFilters')
-
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>Available Filters / Restrictions</Text>

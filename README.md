@@ -2,7 +2,7 @@
 
 <h1 align="center">Meals</h1>
 
-<h1 align="center"><img src="https://ik.imagekit.io/cnbmdh4b9w/ezgif.com-gif-maker__1__VxYPgZ3_6Cy.gif?ik-sdk-version=javascript-1.4.3&updatedAt=1642508297205"></h1>
+<h1 align="center"><img src="https://ik.imagekit.io/cnbmdh4b9w/ezgif.com-gif-maker__2__wa3IROphW.gif?ik-sdk-version=javascript-1.4.3&updatedAt=1642509577130"></h1>
 
 ## About
 

@@ -2,10 +2,16 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import DefaultText from './DefaultText';
 import Colors from '../constants/Colors';
+import  { LinearGradient } from 'expo-linear-gradient';
+
 
 const FallBack = (props)=>{
     return (
-        <View style={styles.content}>
+       <LinearGradient
+        colors={[Colors.lightPink, Colors.lightGreen]}
+        style={styles.content}
+       >
+        <View >
             <DefaultText
                  numberOfLines={2}
                  style={styles.text}
@@ -13,6 +19,8 @@ const FallBack = (props)=>{
                 {props.displayText}
             </DefaultText>
         </View>
+        </LinearGradient>
+       
     )
 };
 
